@@ -4,8 +4,7 @@ server:
 spring:
   application:
     name: user-service
-
-
+    
 eureka:
   instance:
     instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
