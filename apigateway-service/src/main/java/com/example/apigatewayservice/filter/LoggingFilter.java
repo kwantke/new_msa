@@ -67,7 +67,7 @@ public class LoggingFilter extends AbstractGatewayFilterFactory<LoggingFilter.Co
     private String baseMessage;
     private boolean preLogger;
     private boolean postLogger;
-    //private String sayHello;
+
   }
 
 }
