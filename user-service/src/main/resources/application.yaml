@@ -13,5 +13,11 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
+  datasource:
+    url: jdbc:mysql://localhost:33306/hhcinema?serverTimezone=Asia/Seoul
+    username: hhuser
+    password: hh99pw
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
-
+greeting:
+  message: Welcome to the Simple E-commerce.

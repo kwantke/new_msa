@@ -29,10 +29,19 @@ ext {
 
 dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-web'
+  //discovery client
   implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
   compileOnly 'org.projectlombok:lombok'
+
+  // 웹 어플리케이션을 빠르게 재배포하고, 다음에 종료했다가 다시 켜지 않은 상태에서 리로드 할수 있는 간단한 기능들이 포함되어 있다
   developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+  // getter,setter 나 간단한 생성자들을 재정의 할수 있게 해주고 로그 파일을 출력할수 있는 객체다
   annotationProcessor 'org.projectlombok:lombok'
+
+  //msyql
+  runtimeOnly 'com.mysql:mysql-connector-j'
+
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
   testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
