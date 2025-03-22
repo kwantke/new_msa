@@ -1,0 +1,44 @@
+server:
+  port: 8000
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+
+spring:
+  application:
+    name: apigateway-service
+  cloud:
+    gateway:
+      default-filters:
+        - name: GlobalFilter
+          args:
+            baseMessage: Spring Cloud Gateway Global Filter
+            preLogger: true
+            postLogger: true
+      routes:
+        - id: first-service
+          uri: lb://MY-FIRST-SERVICE
+          predicates:
+            - Path=/first-service/** # /first-service/** 이 조건으로 들어오면, http://localhost:8081 를 호출해라 http://localhost:8081/first-service/**
+          filters:
+#            - AddRequestHeader=first-request, first-request-header2  # AddRequestHeader = key, value
+#            - AddResponseHeader=first-response, first-response-header2  # AddRequestHeader = key, value
+            - CustomFilter
+        - id: second-service
+          uri: lb://MY-SECOND-SERVICE
+          predicates:
+            - Path=/second-service/**
+          filters:
+#            - AddRequestHeader=second-request, second-request-header2  # AddRequestHeader = key, value
+#            - AddResponseHeader=second-response, second-response-header2  # AddRequestHeader = key, value
+            # 여러게의 filter를 추가하고 싶으면, name: 키값을 추가해서 작성해줘야한다.
+            - name: CustomFilter
+            - name: LoggingFilter
+              args:
+                baseMessage: Hi, there
+                preLogger: true
+                postLogger: true

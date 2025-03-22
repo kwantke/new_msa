@@ -2,3 +2,6 @@ rootProject.name = 'newmsa'
 
 include 'user-service'
 include 'discoveryservice'
+include 'apigateway-service'
+include 'first-service'
+include 'second-service'

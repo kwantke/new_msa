@@ -1,0 +1,17 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: my-first-service
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+ # server port를 0으로 하면 instance의 id를 새롭게 부여할수 있는 옵션을 추가해줘야한다.
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
