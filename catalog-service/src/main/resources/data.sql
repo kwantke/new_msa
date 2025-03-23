@@ -1,0 +1,1 @@
+insert into catalog(product_id, product_name, stock, unit_price)
