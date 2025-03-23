@@ -23,7 +23,8 @@ public class WebSecurity{
     http.csrf((csrf) -> csrf.disable());
 
     http.authorizeHttpRequests((authz)-> authz
-            .requestMatchers(new AntPathRequestMatcher("/users")).permitAll()
+            .requestMatchers(new AntPathRequestMatcher("/user-service/users/**")).permitAll()
+            .requestMatchers(new AntPathRequestMatcher("/user-service/health_check")).permitAll()
     )
             .sessionManagement((session) -> session
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS));;

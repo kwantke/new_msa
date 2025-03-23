@@ -1,6 +1,7 @@
 package com.example.userservice;
 
 import com.example.userservice.dto.UserDto;
+import com.example.userservice.jpa.UserEntity;
 import com.example.userservice.service.UserService;
 import com.example.userservice.vo.Greeting;
 import com.example.userservice.vo.RequestUser;
@@ -15,8 +16,11 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
-@RequestMapping("/")
+@RequestMapping("/user-service")
 public class UserController {
   private Environment env;
   private UserService userService;
@@ -31,7 +35,7 @@ public class UserController {
 
   @GetMapping("/health_check")
   public String status() {
-    return "It's working in User Service";
+    return String.format("It's working in User Service on PORT %s", env.getProperty("local.server.port"));
   }
 
   @GetMapping("/welcome")
@@ -53,5 +57,24 @@ public class UserController {
 
     //return "Create user method is called";
     return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
+  }
+
+  @GetMapping("/users")
+  public ResponseEntity<List<ResponseUser>> getUsers() {
+    Iterable<UserEntity> userList = userService.getUserByAll();
+    List<ResponseUser> result = new ArrayList<>();
+    userList.forEach(v -> {
+      result.add(new ModelMapper().map(v, ResponseUser.class));
+    });
+    return ResponseEntity.status(HttpStatus.OK).body(result);
+  }
+
+  @GetMapping("/users/{userId}")
+  public ResponseEntity<ResponseUser> getUser(@PathVariable("userId") String userId) {
+    UserDto userDto = userService.getUserByUserId(userId);
+
+    ResponseUser returnUser = new ModelMapper().map(userDto, ResponseUser.class);
+
+    return ResponseEntity.status(HttpStatus.OK).body(returnUser);
   }
 }
