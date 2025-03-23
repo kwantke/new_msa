@@ -51,6 +51,9 @@ dependencies {
   // Mapper
   implementation 'org.modelmapper:modelmapper:3.2.1'
 
+  // Security
+  implementation 'org.springframework.boot:spring-boot-starter-security'
+
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
   testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
