@@ -10,6 +10,10 @@ spring:
     password: hh99pw
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:catalog.sql
   jpa:
     hibernate:
       ddl-auto: create-drop  # create, update, validate, none
@@ -22,7 +26,7 @@ spring:
           time_zone: Asia/Seoul
     open-in-view: false
     defer-datasource-initialization: true
-    generate-ddl: true
+
 
 eureka:
   instance:
